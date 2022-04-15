@@ -90,7 +90,7 @@
            def validation_step(self, batch, batch_nb):
                 loss, y, y_hat = self.step(batch)
                 return {'val_loss': loss,
-                        'y': y.detach(), 'y_hat': y_hat.detach()}
+                        'y': y.detach(), 'y_hat': y_hat.detach()}   # detach() : 기존 tensor를 복사하는 방법 중 하나(기존 tensor에서 gradient전파가 안되는 tensor 생성
 
            def validation_epoch_end(self, outputs):  # 한 에폭이 끝났을 때 실행
                 avg_loss = torch.stack([x['val_loss'] for x in outputs]).mean()
@@ -154,4 +154,6 @@
   ➡️ **pytorch lightning의 장점은 세부적인 high-level코드를 작성할 때 좀 더 정돈되고 간결하게 작성 가능**
   
   
-  
+   **[참고]**
+
+   https://visionhong.tistory.com/30
