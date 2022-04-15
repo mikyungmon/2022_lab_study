@@ -90,7 +90,7 @@
            def validation_step(self, batch, batch_nb):
                 loss, y, y_hat = self.step(batch)
                 return {'val_loss': loss,
-                        'y': y.detach(), 'y_hat': y_hat.detach()}   # detach() : 기존 tensor를 복사하는 방법 중 하나(기존 tensor에서 gradient전파가 안되는 tensor 생성
+                        'y': y.detach(), 'y_hat': y_hat.detach()}   # detach() : 기존 tensor를 복사하는 방법 중 하나(기존 tensor에서 gradient전파가 안되는 tensor 생성)
 
            def validation_epoch_end(self, outputs):  # 한 에폭이 끝났을 때 실행
                 avg_loss = torch.stack([x['val_loss'] for x in outputs]).mean()
@@ -139,7 +139,7 @@
         pytorch lightning에서의 학습 코드는 다음과 같음
           
             checkpoint_callback = pl.callbacks.ModelCheckpoint('{epoch:02d}_{val_auc:.4f}',
-                                                              save_top_k=1, monitor='val_auc', mode='max')  # val_acc가 최대값이 되면 저장되도록함                                                 
+                                                              save_top_k=1, monitor='val_auc', mode='max')  # val_auc가 최대값이 되면 저장되도록함                                                 
             trainer = pl.Trainer(
                 tpu_cores=tpu_cores,
                 gpus=gpus,
