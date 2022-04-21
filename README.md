@@ -196,3 +196,48 @@
      - 높을수록 좋은 모델
      
      - 식은 2 * (precision * recall / (precision + recall))과 같음
+
+### - Albumentation
+   
+   - Albumentation은 이미지를 손쉽게 augmentation해주는 python 라이브러리
+
+   - pytorch를 예시로 들면 torchviwion이라는 패키지를 사용하여 다양한 transform을 할 수 있도록 지원을 하는데, albumentation은 torchvision에서 지원하는 transform보다 더 효율적이고 다양한 augmentation기법을 지원함
+
+   ![image](https://user-images.githubusercontent.com/66320010/164391882-1068f301-21ec-45b0-8f0f-f5573e02549a.png)
+
+   - 다양한 영상변환 알고리즘을 제공하고 있고 처리속도도 매우 빨라 딥러닝 전처리 용으로 유용하게 사용할 수 있음
+
+   - 파이썬 3.6 버전 이상을 사용하여야하고 설치는 다음과 같이 함
+   
+         pip install -U albumentations
+
+   - 사용방법
+   
+      1) import albumentation 을 한다.
+      2) transform = A.Compose([]) 을 이용하여 augmentation을 적용하기 위한 객체를 생성한다.
+      3) augmentations = transform(image=image, mask=mask)를 하여 실제 augmentation을 적용한다.
+      4) augmentation_img = augmentations["image"] 하여 augmentation된 이미지를 얻는다.
+
+   - 예시 코드(출처: https://gaussian37.github.io/dl-pytorch-albumentation/)
+
+         import albumentations as A
+         import cv2
+
+         image = cv2.imread("city_image.png")
+         mask = cv2.imread("city_mask.png")
+
+         height = 150
+         width = 300
+
+         # Declare an augmentation pipeline
+         transform = A.Compose([
+             A.Resize(height=height, width=width),
+             A.RandomResizedCrop(height=height, width=width, scale=(0.3, 1.0)),
+         ])
+
+         augmentations = transform(image=image, mask=mask)
+         augmentation_img = augmentations["image"]
+         augmentation_mask = augmentations["mask"]
+
+         cv2.imwrite("city_image_augmented.png", augmentation_img)
+         cv2.imwrite("city_mask_augmented.png", augmentation_mask)
