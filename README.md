@@ -201,7 +201,7 @@
    
    - Albumentation은 이미지를 손쉽게 augmentation해주는 python 라이브러리
 
-   - pytorch를 예시로 들면 torchviwion이라는 패키지를 사용하여 다양한 transform을 할 수 있도록 지원을 하는데, albumentation은 torchvision에서 지원하는 transform보다 더 효율적이고 다양한 augmentation기법을 지원함
+   - pytorch를 예시로 들면 torchviion이라는 패키지를 사용하여 다양한 transform을 할 수 있도록 지원을 하는데, albumentation은 torchvision에서 지원하는 transform보다 더 효율적이고 다양한 augmentation기법을 지원함
 
    ![image](https://user-images.githubusercontent.com/66320010/164391882-1068f301-21ec-45b0-8f0f-f5573e02549a.png)
 
