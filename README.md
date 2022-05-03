@@ -265,7 +265,7 @@
          for k, (img, target) in enumerate(data_loader): 
              img, target = img.to(device), target.to(device)
 
-         output = my_model(img).to(device) # 에측할 이미지를 모델에 넣어서 output을 얻음
+         output = my_model(img).to(device) # 예측할 이미지를 모델에 넣어서 output을 얻음
          pred = output.argmax(dim=1).to(device) # pred로 변경
          target = target.view_as(pred).to(device) # 각자 본인의 code에 맞는 target 값 구함
 
