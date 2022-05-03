@@ -241,3 +241,36 @@
 
          cv2.imwrite("city_image_augmented.png", augmentation_img)
          cv2.imwrite("city_mask_augmented.png", augmentation_mask)
+         
+### - torchmetrics
+
+   - 모델 평가시에 사용하는 모듈
+
+   - 다음과 같이 사용하면 됨
+
+         import torchmetrics
+
+         metric = torchmetrics.Accuracy() ------ 모델 평가(정확도) 초기화
+         
+   - 예시) f1 score 구하기
+
+         from torchmetrics import F1Score
+         
+         f1 = F1Score(num_classes=18) # num_classes의 값으로 18을 주고 인스턴스를 생성
+         
+         ...
+
+         with torch.no_grad():
+         f1_score = 0
+         for k, (img, target) in enumerate(data_loader): 
+             img, target = img.to(device), target.to(device)
+
+         output = my_model(img).to(device) # 에측할 이미지를 모델에 넣어서 output을 얻음
+         pred = output.argmax(dim=1).to(device) # pred로 변경
+         target = target.view_as(pred).to(device) # 각자 본인의 code에 맞는 target 값 구함
+
+         f1_score += f1(pred, target) # 위에서 만든 f1 인스턴스를 이용해 f1_score를 합산
+         f1_score /= len(valid_dataset) # 평균을 구하기 위해 나눠줌
+         print(f1_score)
+
+      
